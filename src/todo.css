@@ -5,27 +5,62 @@ p {
 
 #todo {
     height: 100%;
-    background:  #7a5b8e;
-
+    background-image: url(../images/back.png);
+    background-size: cover;
 }
 
+#todo #sign-title {
+    font-weight: bold;
+    font-size: 80px;
+    margin-bottom: 40px;
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+}
+
+
 #todo > .header > .newTask {
-    width: 800px;
+    width: 600px;
     margin: 0 auto;
-    margin-top: 180px;
+    margin-top: 120px;
+}
+
+
+#todo > .header > p {
+    text-align: right;
+}
+
+#todo > .header .button-logout {
+    width: 100px;
+    height: 50px;
+    border: 0;
+    border-radius: 4px;
+    padding: 0;
+    background-color: #78d64f;
+    color: white;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s linear;
+}
+
+#todo > .header .button-logout:hover {
+    opacity: 1;
 }
 
 #todo > .header > .newTask > input {
-    width: 800px;
+    width: 564px;
     height: 60px;
-    font-size: 30px;
-    padding: 0 8px;
+    font-size: 24px;
+    padding: 0 16px 0 36px;
     border: 0;
+    outline: none;
 }
 
 .todos-container {
     background:  #ffffff;
-    width: 816px;
+    width: 616px;
     margin: 0 auto;
     transform: translateX(8px);
 }
@@ -36,57 +71,72 @@ p {
 }
 
 .todos-container > ol > li {
-    height: 30px;
     border-top: 1px solid lightgrey;
+    white-space: pre-line;
+    word-break: break-all;
+    line-height: 1.2;
+    font-size: 24px;
+    padding: 15px 60px 15px 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.todos-container > ol > li > input[type="checkbox"] {
-    appearance: none;
+.todos-container > ol > li .todo-content {
+    margin-left: 30px;
+    transition: all 0.2s linear;
+}
+
+.todos-container > ol > li .todo-content.done {
+    color: lightgrey;
+    text-decoration: line-through;
+}
+
+.todos-container > ol > li .logo-delete {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    background-image: url(../images/删除.png);
+    background-size: cover;
+    transition: all 0.2s linear;
+}
+
+.todos-container > ol > li .logo-delete:hover {
+    background-image: url(../images/删除红.png);
+}
+
+.todos-container > ol > li > .checkbox-container {
+    background-image: url(../images/未勾选.png);
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    display: block;
+}
+
+.todos-container > ol > li > .checkbox-container .regular-checkbox {
     -webkit-appearance: none;
+    appearance: none;
     outline: none;
-    display: none;
-}
-
-.todos-container > ol > li > label {
-	display: inline;
-}
-
-.todos-container > ol > li > .regular-checkbox {
-	display: none;
-}
-
-.todos-container > ol > li > .regular-checkbox + label {
-	background-color: #fafafa;
-	border: 1px solid #cacece;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-	padding: 9px;
-	border-radius: 3px;
-	display: inline-block;
-	position: relative;
-}
-
-.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-}
-
-.todos-container > ol > li > .regular-checkbox:checked + label {
-	background-color: #e9ecee;
-	border: 1px solid #adb8c0;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-	color: #99a1a7;
-}
-
-.todos-container > ol > li > .regular-checkbox:checked + label:after {
-	content: '\2714';
-	font-size: 14px;
-	position: absolute;
-	top: 0px;
-	left: 3px;
-	color: #99a1a7;
+    border: none;
+    display: block;
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    cursor: pointer;
 }
 
 
+.todos-container > ol > li > .checkbox-container .regular-checkbox:after {
+    background-image: url(../images/未勾选32.png); 
+    background-size: cover; 
+} 
 
-/* input[type="checkbox"]:checked 
-input[type="checkbox"]:disabled 
-input[type="checkbox"]:checked:disabled   */
+.todos-container > ol > li > .checkbox-container .regular-checkbox:checked:after {
+    content: '';
+    background-image: url(../images/勾.png);
+    display: block;
+    height: 30px;
+    width: 30px;
+}

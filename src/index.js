@@ -12,6 +12,7 @@ AV.init({
 var app = new Vue({
     el: '#app',
     data: {
+        todoId: 0,
         newTodo: '',
         // 所有待办事项的容器
         todoList: [],
@@ -28,7 +29,6 @@ var app = new Vue({
         // 获取 User 的 AllTodos 用于读取
         this.currentUser = this.getCurrentUser()
         this.fetchTodos()
-        lengthOfTodos()
     },
     methods: {
         fetchTodos() {
@@ -37,27 +37,12 @@ var app = new Vue({
                 query.find().then((todos) => {
                     let avAllTodos = todos[0]
                     let id = avAllTodos.id
-                    console.log('获取到的 avAlltodos.id', id)
                     this.todoList = JSON.parse(avAllTodos.attributes.content)
-                    console.log('获取到 parse 后的 todoList', this.todoList)
                     this.todoList.id = id
-                    console.log('获取到 parse 后的 todoList.id', this.todoList.id)
                 }, (error) => {
                     console.error(error)
                 })
             }
-        },
-        // 获取下长度
-        lengthOfTodos() {
-            var query = new AV.Query('AllTodos')
-            query.find().then((todos) => {
-                let avAllTodos = todos[0]
-                this.todoList = JSON.parse(avAllTodos.attributes.content)
-                console.log('获取到 parse 后的 todoList', this.todoList)
-                console.log('获取到 parse 后的 todoList 长度',this.todoList.length)
-            }, (error) => {
-                console.error(error)
-            })
         },
         updateTodos() {
             console.log('序列化有 id 的数组之前', this.todoList)
@@ -100,6 +85,7 @@ var app = new Vue({
         },
         addTodo() {
             this.todoList.push({
+                    id: this.todoId,
                     title: this.newTodo,
                     createdAt: new Date(),
                     done: false

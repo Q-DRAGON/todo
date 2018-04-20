@@ -38,28 +38,29 @@
                       </form>
                   </div>
                   <div class='sign-container'>
-                      <button v-on:click="actionType='signUp'">注册
-                      <button v-on:click="actionType='login'">登入
+                      <button v-on:click="actionType='signUp'">注册页
+                      <button v-on:click="actionType='login'">登入页
                   </div>
               </div>
             </section>
 
             <section id="todo" v-if="currentUser">
                 <div class="header">
-                    <p><button @click="logout">登出</button></p>
+                    <div id="sign-title">todoList</div>
+                    <p><button class="button-logout" @click="logout">登出</button></p>
                     <div class="newTask">
-                        <input type="text" v-model="newTodo" @keydown.enter="addTodo" placeholder="输入你的事件,  敲击回车保存">
+                        <input type="text" v-model="newTodo" @keydown.enter="addTodo" placeholder="输入你的事件,  敲击回车添加">
                     </div>
                  </div>
                 <div class="todos-container">
                     <ol class="todos">
                         <li v-for="todo in todoList">
-                        <input type="checkbox" id="todo.id" class="regular-checkbox" v-model="todo.done" @click="finish(todo)">
                         <label for="todo.id"></label>
-                        <span class='todo-content'>{{ todo.title }}</span>
-                        <span v-if="todo.done">已完成</span>
-                        <span v-else>未完成</span>
-                        <button @click="removeTodo(todo)">delete</button>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="todo.id" class="regular-checkbox"  v-model="todo.done" @click="finish(todo)">
+                        </div>
+                        <span class='todo-content' :class="{done:todo.done}">{{ todo.title }}</span>
+                        <div class='logo-delete' @click="removeTodo(todo)"></div>
                         </li>
                     </ol>
                 </div>
