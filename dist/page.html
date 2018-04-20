@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>vue-todo</title>
+    <link rel="stylesheet" href="../src/index.css">
+    <link rel="stylesheet" href="../src/todo.css">
+</head>
+<body>
+    <div id="app">
+        <section id="signInAndSignUp" v-if="!currentUser">
+            <div id="signInAndSignUp-container">
+                <div id="sign-title">todoList</div>
+                <div class="signUp" v-if="actionType=='signUp'">
+                    <form @submit.prevent=signUp>
+                        <div class="formRow">
+                            <input type="text" v-model="formData.username" placeholder="username">
+                        </div>
+                        <div class="formRow">
+                            <input type="password" v-model="formData.password" placeholder="password">
+                        </div>
+                        <div class="formActions">
+                            <input type="submit" value="注册">
+                        </div>
+                    </form>
+                  </div>
+                  <div class="login" v-if="actionType=='login'">
+                      <form @submit.prevent=login>
+                          <div class="formRow">
+                              <input type="text" v-model="formData.username" placeholder="username">
+                          </div>
+                          <div class="formRow">
+                              <input type="password" v-model="formData.password" placeholder="password">
+                          </div>
+                          <div class="formActions">
+                              <input type="submit" value="登入">
+                          </div>
+                      </form>
+                  </div>
+                  <div class='sign-container'>
+                      <button v-on:click="actionType='signUp'">注册
+                      <button v-on:click="actionType='login'">登入
+                  </div>
+              </div>
+            </section>
+
+            <section id="todo" v-if="currentUser">
+                <div class="header">
+                    <p><button @click="logout">登出</button></p>
+                    <div class="newTask">
+                        <input type="text" v-model="newTodo" @keydown.enter="addTodo" placeholder="输入你的事件,  敲击回车保存">
+                    </div>
+                 </div>
+                <div class="todos-container">
+                    <ol class="todos">
+                        <li v-for="todo in todoList">
+                        <input type="checkbox" id="todo.id" class="regular-checkbox" v-model="todo.done" @click="finish(todo)">
+                        <label for="todo.id"></label>
+                        <span class='todo-content'>{{ todo.title }}</span>
+                        <span v-if="todo.done">已完成</span>
+                        <span v-else>未完成</span>
+                        <button @click="removeTodo(todo)">delete</button>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+</body>
+    <script src="main.js"></script>
+</html>
